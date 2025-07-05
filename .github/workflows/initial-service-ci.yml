@@ -22,4 +22,4 @@ jobs:
 
       - name: Run UTs
         run: go test -cover ./...
-        working-directory: service-a
+        working-directory: initial-service
