@@ -1,0 +1,25 @@
+name: ci
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "initial-service/**"
+
+jobs:
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest # change docker image to be closer to what we'll deploy with?
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.23.0"
+
+      - name: Run UTs
+        run: go test -cover ./...
+        working-directory: service-a
