@@ -39,7 +39,7 @@ jobs:
       - name: Check commit messages
         run: |
           git fetch --prune --unshallow || true
-          git fetch origin main || true
+          git fetch origin ${{ github.event.pull_request.base.ref }}
           BASE_BRANCH=${{ github.event.pull_request.base.ref }}
           git log --format=%s origin/$BASE_BRANCH..HEAD | grep -vE '^AGG-[0-9]+' &&     
           echo "❌ Commit messages must start with AGG-X" && exit 1 || echo "✅ Format ok"
