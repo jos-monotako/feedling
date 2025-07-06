@@ -3,6 +3,7 @@
 #
 # Bins from compilation
 initial-service/initial-service
+.github/workflows/push-ci.yml
 
 # Binaries for programs and plugins
 *.exe
