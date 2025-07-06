@@ -24,6 +24,6 @@ jobs:
           git log "origin/${{ github.event.pull_request.base.ref }}"..."origin/${{ github.head_ref }}" --pretty=format:"%s" | 
           grep -vE '^AGG-[0-9]+' | 
           grep -q . && exit 1 || exit 0 
-        # get the commit messages introduced by this branch (not in main branch)
+        # get the commit messages introduced by this branch (not in main branch) 
         # check if they start with AGG-[0-9]+
-        # exit 1 if at least one of them doesn't meet that criteria
+        # exit 1 if at least one of them doesn't meet that criteria.
