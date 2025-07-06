@@ -12,19 +12,11 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v4
-
-      - name: Fetch default branch
-        run: git fetch origin ${{ github.event.pull_request.base.ref }}
-      
-      - name: Fetch PR branch
-        run: git fetch origin ${{ github.head_ref }}
-
       - name: Check commit messages
         run: |
-          git log ${{ github.event.pull_request.base.ref }}...${{ github.head_ref }} --pretty=format:"%s" | 
+          git log "origin/${{ github.event.pull_request.base.ref }}"..."origin/${{ github.head_ref }}" --pretty=format:"%s" | 
           grep -vE '^AGG-[0-9]+' | 
           grep -q . && exit 1 || exit 0 
-        # fetch this branch, 
         # get the commit messages introduced by this branch (not in main branch)
         # check if they start with AGG-[0-9]+
         # exit 1 if at least one of them doesn't meet that criteria
