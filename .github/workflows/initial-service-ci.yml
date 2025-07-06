@@ -1,0 +1,53 @@
+name: initial-service-ci
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "initial-service/**"
+
+jobs:
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest # change docker image to be closer to what we'll deploy with?
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.23.0"
+
+      - name: Run UTs
+        run: go test -cover ./...
+        working-directory: initial-service
+
+  lint:
+    name: Style and Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.23.0"
+      - name: Check for formatting issues
+        run: test -z $(go fmt ./...)
+        working-directory: initial-service
+      - name: Install staticcheck
+        run: go install honnef.co/go/tools/cmd/staticcheck@latest
+
+      - name: Run Static Checker
+        run: staticcheck ./...
+        working-directory: initial-service
+      - name: Install gosec
+        run: go install github.com/securego/gosec/v2/cmd/gosec@latest
+      
+      - name: Run CI sec check
+        run: gosec ./...
+        working-directory: initial-service
