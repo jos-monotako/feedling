@@ -41,7 +41,7 @@ jobs:
           git fetch --prune --unshallow || true
           git fetch origin ${{ github.event.pull_request.base.ref }}
           BASE_BRANCH=${{ github.event.pull_request.base.ref }} 
-          git log main...$BASE_BRANCH --pretty=format:"%s" | 
+          git log $BASE_BRANCH...HEAD --pretty=format:"%s" | 
           grep -vE '^AGG-[0-9]+' | 
           grep -q . && exit 1 || exit 0 
         # fetch this branch, 
