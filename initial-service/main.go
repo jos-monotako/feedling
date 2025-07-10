@@ -9,5 +9,10 @@ import (
 func main() {
 	feed, _ := scraper.GetFeed("https://steamcommunity.com/games/2622380/rss/")
 
-	fmt.Println(feed.Channel.Items[0].Description)
+	for _, item := range feed.Channel.Items {
+		fmt.Println(item.Title)
+		fmt.Println(item.Description)
+		fmt.Println("===================================================")
+	}
+
 }
