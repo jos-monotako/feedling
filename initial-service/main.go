@@ -11,7 +11,7 @@ func main() {
 
 	for _, item := range feed.Channel.Items {
 		fmt.Println(item.Title)
-		fmt.Println(item.Description)
+		fmt.Println(scraper.HTMLtoCleanText(item.Description))
 		fmt.Println("===================================================")
 	}
 

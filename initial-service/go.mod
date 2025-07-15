@@ -1,3 +1,5 @@
 module github.com/jos-monotako/feedling/initial-service
 
 go 1.23.0
+
+require golang.org/x/net v0.42.0
